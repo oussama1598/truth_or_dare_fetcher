@@ -13,7 +13,8 @@ export default class Fetcher extends EventEmitter {
   }
 
   async fetch() {
-    const category = this.categories[Math.floor(Math.random() * 5)];
+    const category = this.categories[Math.floor(Math.random() * 4)];
+    console.log('Category', category);
     const truth = await getTruth(category);
     const dare = await getDare(category);
 
