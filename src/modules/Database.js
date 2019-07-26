@@ -46,23 +46,25 @@ export default class Database {
     );
   }
 
-  async checkIfItemExists($id, $type) {
+  async checkIfItemExists(item) {
     const results = await this.getData(
-      'SELECT * FROM records WHERE id=$id AND type=$type',
+      'SELECT * FROM records WHERE id=$id AND type=$type AND $category=$category',
       {
-        $id,
-        $type
+        $id: item.id,
+        $type: item.type,
+        $category: item.category
       }
     );
 
     return !!results.length;
   }
 
-  async getLengthOfType($type) {
+  async getLengthOfType($type, $category) {
     const results = await this.getData(
-      'SELECT * FROM records WHERE type=$type',
+      'SELECT * FROM records WHERE type=$type AND $category=$category',
       {
-        $type
+        $type,
+        $category
       }
     );
 
@@ -79,5 +81,9 @@ export default class Database {
         $category: item.category
       }
     );
+  }
+
+  async getAll() {
+    return this.getData('SELECT * FROM records');  
   }
 }
