@@ -9,9 +9,16 @@ import serializeError from '../utils/serializeError';
 
 program.version(version).usage('[options] <name>');
 
+const category = 15;
+
 (async function main() {
   const logger = loggerService(false);
+  const database = new Database(path.join(process.cwd(), 'database.db'));
+  const fetcher = new Fetcher(database);
+
   fetcher.on('info', data => {
+    logger.info(`For category: ${category}`);
+    logger.info(
       Object.keys(data)
         .map(key => `${key}: ${data[key]}`)
         .join('\n')
@@ -19,10 +26,7 @@ program.version(version).usage('[options] <name>');
   });
 
   try {
-    await database.init();
-    await database.createRecordsTable();
-
-    await fetcher.fetch(15);
+    await fetcher.fetch(category);
 
     logger.info('Fetching Done');
   } catch (e) {

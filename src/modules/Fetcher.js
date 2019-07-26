@@ -14,20 +14,20 @@ export default class Fetcher extends EventEmitter {
     const truth = await getTruth(category);
     const dare = await getDare(category);
 
-    if (!(await this.db.checkIfItemExists(truth.id, truth.type))) {
+    if (!this.db.checkIfItemExists(truth)) {
       if (truth.id > this.truthLength) this.truthLength = truth.id;
 
       this.db.addItem(truth);
     }
 
-    if (!(await this.db.checkIfItemExists(dare.id, dare.type))) {
+    if (!this.db.checkIfItemExists(dare)) {
       if (dare.id > this.dareLength) this.dareLength = dare.id;
 
-      await this.db.addItem(dare);
+      this.db.addItem(dare);
     }
 
-    const truthLength = await this.db.getLengthOfType('truth');
-    const dareLength = await this.db.getLengthOfType('dare');
+    const truthLength = this.db.getLengthOfType('truth', category);
+    const dareLength = this.db.getLengthOfType('dare', category);
 
     this.emit('info', {
       totalTruthsFound: this.truthLength,
