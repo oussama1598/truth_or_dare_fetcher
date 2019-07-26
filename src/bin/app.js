@@ -14,7 +14,7 @@ const category = 15;
 
 (async function main() {
   const logger = loggerService(false);
-  const database = new Database(':memory:');
+  const database = new Database(path.join(process.cwd(), 'data.json'));
   const fetcher = new Fetcher(database);
 
   fetcher.on('info', data => {
@@ -27,18 +27,11 @@ const category = 15;
   });
 
   try {
-    await database.init();
-    await database.createRecordsTable();
-
     await fetcher.fetch(category);
 
     logger.info('Fetching Done, Saving to file');
 
-    const data = await database.getAll();
-    fs.writeFileSync(
-      path.join(process.cwd(), 'data.json'),
-      JSON.stringify({ data })
-    );
+    database.save();
   } catch (e) {
     logger.error(serializeError('Something went wrong', e));
   }

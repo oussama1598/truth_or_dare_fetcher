@@ -45,6 +45,7 @@
     "@babel/runtime": "^7.5.2",
     "commander": "^2.20.0",
     "flavors": "^4.1.1",
+    "lokijs": "^1.5.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "serialize-error": "^4.1.0",
