@@ -28,10 +28,10 @@ export default class Database {
     return !!results.length;
   }
 
-  getLengthOfType(type, category) {
+  getLengthOfType(type) {
     const results = this.db
-      .prepare('SELECT * FROM records WHERE type=? AND category=?')
-      .all(type, category);
+      .prepare('SELECT * FROM records WHERE type=?')
+      .all(type);
 
     return results.length;
   }

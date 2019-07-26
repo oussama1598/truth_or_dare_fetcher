@@ -9,15 +9,12 @@ import serializeError from '../utils/serializeError';
 
 program.version(version).usage('[options] <name>');
 
-const category = 15;
-
 (async function main() {
   const logger = loggerService(false);
   const database = new Database(path.join(process.cwd(), 'database.db'));
   const fetcher = new Fetcher(database);
 
   fetcher.on('info', data => {
-    logger.info(`For category: ${category}`);
     logger.info(
       Object.keys(data)
         .map(key => `${key}: ${data[key]}`)
@@ -26,7 +23,7 @@ const category = 15;
   });
 
   try {
-    await fetcher.fetch(category);
+    await fetcher.fetch();
 
     logger.info('Fetching Done');
   } catch (e) {
