@@ -11,7 +11,7 @@ export default class Fetcher extends EventEmitter {
   }
 
   async fetch() {
-    const category = this.categories[Math.floor(Math.random() * 35)];
+    const category = Math.floor(Math.random() * 36);
     console.log('Category', category);
     const truth = await getTruth(category);
     const dare = await getDare(category);

@@ -11,7 +11,7 @@ program.version(version).usage('[options] <name>');
 
 (async function main() {
   const logger = loggerService(false);
-  const database = new Database(path.join(process.cwd(), 'database.db'));
+  const database = new Database(path.join(process.cwd(), '../database.db'));
   const fetcher = new Fetcher(database);
 
   fetcher.on('info', data => {
