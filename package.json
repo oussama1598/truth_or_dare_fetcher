@@ -1,0 +1,54 @@
+{
+  "name": "truth_or_dare_fetcher",
+  "version": "1.0.0",
+  "description": "My personal boilerplate for cli apps",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "build": "gulp build",
+    "install_bin": "set NODE_ENV=production && npm install && npm link"
+  },
+  "keywords": [
+    "cli",
+    "boilerplate"
+  ],
+  "author": {
+    "name": "Oussama Barkouki",
+    "email": "oussama1598@gmail.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "app-name-bin": "index.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^10.0.2",
+    "del": "^5.0.0",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-load-plugins": "^2.0.0",
+    "gulp-remove-code": "^3.0.4",
+    "gulp-sourcemaps": "^2.6.5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.2",
+    "commander": "^2.20.0",
+    "flavors": "^4.1.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "serialize-error": "^4.1.0",
+    "sqlite3": "^4.0.9",
+    "winston": "^3.2.1"
+  }
+}
