@@ -10,6 +10,8 @@ export async function getTruth(category) {
     json: true
   });
 
+  if (result.hasOwnProperty('length')) return false;
+
   return new Truth(result.id, result.text, category);
 }
 
@@ -17,6 +19,8 @@ export async function getDare(category) {
   const result = await request(`${DARE_URI}${category}`, {
     json: true
   });
+
+  if (result.hasOwnProperty('length')) return false;
 
   return new Dare(result.id, result.text, category);
 }
