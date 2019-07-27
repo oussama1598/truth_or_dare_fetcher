@@ -8,7 +8,7 @@ export default class Fetcher extends EventEmitter {
     this.db = database;
     this.truthLength = 0;
     this.dareLength = 0;
-    this.category = 1;
+    this.category = 35;
   }
 
   async fetch() {
