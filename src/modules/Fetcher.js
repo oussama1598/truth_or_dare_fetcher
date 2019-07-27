@@ -8,37 +8,39 @@ export default class Fetcher extends EventEmitter {
     this.db = database;
     this.truthLength = 0;
     this.dareLength = 0;
+    this.category = 0;
   }
 
   async fetch() {
-    const category = Math.floor(Math.random() * 36);
-    console.log('Category', category);
+    const category = this.category % 35;
     const truth = await getTruth(category);
     const dare = await getDare(category);
 
-    // if (truth.id > this.truthLength) this.truthLength = truth.id;
-    // if (dare.id > this.dareLength) this.dareLength = dare.id;
+    if (truth.id > this.truthLength) this.truthLength = truth.id;
+    if (dare.id > this.dareLength) this.dareLength = dare.id;
 
-    // if (truth && !this.db.checkIfItemExists(truth)) this.db.addItem(truth);
+    if (truth && !this.db.checkIfItemExists(truth)) this.db.addItem(truth);
 
-    // if (dare && !this.db.checkIfItemExists(dare)) this.db.addItem(dare);
+    if (dare && !this.db.checkIfItemExists(dare)) this.db.addItem(dare);
 
     const truthLength = this.db.getLengthOfType('truth');
     const dareLength = this.db.getLengthOfType('dare');
 
-    // this.emit('info', {
-    //   totalTruthsFound: this.truthLength,
-    //   totalDaresFound: this.dareLength,
-    //   localTruthsLength: truthLength,
-    //   localDaresLength: dareLength
-    // });
+    this.emit('info', {
+      totalTruthsFound: this.truthLength,
+      totalDaresFound: this.dareLength,
+      localTruthsLength: truthLength,
+      localDaresLength: dareLength
+    });
 
-    // if (truthLength < this.truthLength) return this.fetch();
-    // if (dareLength < this.dareLength) return this.fetch();
+    this.category += 1;
 
-    // return {
-    //   truthLength,
-    //   dareLength
-    // };
+    if (truthLength < this.truthLength) return this.fetch();
+    if (dareLength < this.dareLength) return this.fetch();
+
+    return {
+      truthLength,
+      dareLength
+    };
   }
 }
