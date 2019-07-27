@@ -21,19 +21,17 @@ export default class Database {
   }
 
   checkIfItemExists(item) {
-    const results = this.db
-      .prepare('SELECT * FROM records WHERE id=? AND type=? AND category=?')
-      .all(item.id, item.type, item.category);
-
-    return !!results.length;
+    return this.db
+      .prepare(
+        'SELECT count(id) FROM records WHERE id=? AND type=? AND category=?'
+      )
+      .get(item.id, item.type, item.category)['count(id)'];
   }
 
   getLengthOfType(type) {
-    const results = this.db
-      .prepare('SELECT * FROM records WHERE type=?')
-      .all(type);
-
-    return results.length;
+    return this.db
+      .prepare('SELECT count(id) FROM records WHERE type=?')
+      .get(type)['count(id)'];
   }
 
   addItem(item) {
